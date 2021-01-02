@@ -537,4 +537,10 @@ function EventHandler.WEBHOOKS_UPDATE(d, client) -- webhook object is not provid
 	return client:emit('webhooksUpdate', channel)
 end
 
+function EventHandler.INVITE_CREATE(d, client)
+  	local guild = client._guilds:get(d.guild_id)
+  	if not guild then return warning(client, 'Guild', d.guild_id, 'INVITE_CREATE') end
+  	return client:emit('inviteCreate', d, guild)
+end
+
 return EventHandler
